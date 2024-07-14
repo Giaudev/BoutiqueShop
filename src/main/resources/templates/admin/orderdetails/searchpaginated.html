@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/dashboard.html}"
+>
+  <head>
+    <title>Search OrderDetail</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container" layout:fragment="content">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><h2>Search OrderDetails</h2></div>
+            <div class="card-body">
+              <div
+                th:if="${message != null}"
+                class="alert alert-primary"
+                role="alert"
+              >
+                <i th:text="${message}"></i>
+              </div>
+              <div class="row">
+                <div
+                  class="col d-flex align-items-center justify-content-between"
+                >
+                  <form th:action="@{/admin/orderdetails/searchpaginated}">
+                    <div class="mb-3 d-flex align-items-center gap-3">
+                      <label for="orderId" class="form-label"
+                        >Search By Order ID</label
+                      >
+                      <input
+                        type="text"
+                        class="px-4 py-2"
+                        name="orderId"
+                        id="orderId"
+                        aria-describedby="helpId"
+                        style="width: 250px; border-radius: 8px; outline: none"
+                      />
+                      <button type="submit" class="btn btn-primary px-4 py-2">
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                  <div class="mb-3">
+                    <a
+                      th:href="@{/admin/orderdetails/add}"
+                      class="btn btn-outline-info"
+                      >Add New OrderDetail</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- thông báo lỗi productPage -->
+              <div class="row" th:if="${!orderDetailPage.hasContent()}">
+                <div class="col">
+                  <div class="alert alert-danger" role="alert">
+                    <strong>orderDetailPage is not found</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table
+                  class="table table-primary"
+                  th:if="${orderDetailPage.hasContent()}"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">OrderDetail ID</th>
+                      <th scope="col">Order ID</th>
+                      <th scope="col">Product ID</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      class=""
+                      th:each="orderDetail, iStat : ${orderDetailPage.content}"
+                    >
+                      <td th:text="${orderDetail.orderDetailId}"></td>
+                      <td th:text="${orderDetail.order.orderId}"></td>
+                      <td th:text="${orderDetail.product.productId}"></td>
+                      <td th:text="${orderDetail.quantity}"></td>
+                      <td th:text="${orderDetail.price}"></td>
+                      <td>
+                        <a
+                          th:href="@{/admin/orderdetails/view/{id}(id=${orderDetail.orderDetailId})}"
+                          >Info</a
+                        >
+                        <a
+                          th:href="@{/admin/orderdetails/edit/{id}(id=${orderDetail.orderDetailId})}"
+                          >Edit</a
+                        >
+                        <a
+                          th:href="@{/admin/orderdetails/delete/{id}(id=${orderDetail.orderDetailId})}"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- start footer -->
+            <div class="card-footer text-muted d-flex justify-content-between">
+              <form action="">
+                <div class="form-inline">
+                  <label for="size">Page Size:</label>
+                  <select
+                    class="px-lg-2 py-lg-1"
+                    name="size"
+                    id="size"
+                    onchange="this.form.submit()"
+                  >
+                    <option
+                      th:selected="${orderDetailPage.size == 5}"
+                      value="5"
+                    >
+                      5
+                    </option>
+                    <option
+                      th:selected="${orderDetailPage.size == 10}"
+                      value="10"
+                    >
+                      10
+                    </option>
+                    <option
+                      th:selected="${orderDetailPage.size == 20}"
+                      value="20"
+                    >
+                      20
+                    </option>
+                    <option
+                      th:selected="${orderDetailPage.size == 30}"
+                      value="30"
+                    >
+                      30
+                    </option>
+                  </select>
+                </div>
+              </form>
+              <nav aria-label="Page navigation">
+                <ul
+                  class="pagination"
+                  th:if="${orderDetailPage.totalPages > 0}"
+                >
+                  <li
+                    th:classappend="${orderDetailPage.number == 0} ? ' disabled' : ''"
+                    class="page-item"
+                  >
+                    <a
+                      th:href="@{/admin/orderdetails/searchpaginated(orderId=${orderId}, size=${orderDetailPage.size}, page=${0})}"
+                      class="page-link"
+                      >First</a
+                    >
+                  </li>
+                  <li
+                    th:each="pageNumber : ${pageNumbers}"
+                    th:classappend="${pageNumber == orderDetailPage.number + 1} ? ' active' : ''"
+                    class="page-item"
+                  >
+                    <a
+                      th:href="@{/admin/orderdetails/searchpaginated(orderId=${orderId}, size=${orderDetailPage.size}, page=${pageNumber - 1})}"
+                      class="page-link"
+                      th:text="${pageNumber}"
+                    ></a>
+                  </li>
+                  <li
+                    th:classappend="${orderDetailPage.number + 1 == orderDetailPage.totalPages} ? ' disabled' : ''"
+                    class="page-item"
+                  >
+                    <a
+                      th:href="@{/admin/orderdetails/searchpaginated(orderId=${orderId}, size=${orderDetailPage.size}, page=${orderDetailPage.totalPages - 1})}"
+                      class="page-link"
+                      >Last</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <!-- end footer -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/dashboard.html}"
+>
+  <head>
+    <title>OrderDetail</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container" layout:fragment="content">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h2>
+                <span th:if="${!orderDetail.isEdit}">Add</span>
+                <span th:if="${orderDetail.isEdit}">Update</span>
+                New OrderDetail
+              </h2>
+            </div>
+            <div class="card-body">
+              <form
+                th:action="@{/admin/orderdetails/saveOrUpdate}"
+                th:object="${orderDetail}"
+                method="post"
+              >
+                <div class="mb-3 form-group">
+                  <label for="orderDetailId" class="form-label"
+                    >OrderDetail ID:</label
+                  >
+                  <input type="hidden" th:field="*{isEdit}" />
+                  <input
+                    th:field="*{orderDetailId}"
+                    type="text"
+                    class="form-control"
+                    id="orderDetailId"
+                    aria-describedby="helpId"
+                    readonly
+                  />
+                  <small
+                    th:if="${#fields.hasErrors('orderDetailId')}"
+                    class="text-muted form-text"
+                    >orderDetailId is required</small
+                  >
+                </div>
+
+                <div class="mb-3 form-group">
+                  <label for="orderId" class="form-label">Order ID:</label>
+                  <input
+                    th:field="*{orderId}"
+                    type="text"
+                    class="form-control"
+                    id="orderId"
+                    aria-describedby="helpId"
+                    placeholder="please enter your OrderID..."
+                  />
+                  <small
+                    th:if="${#fields.hasErrors('orderId')}"
+                    class="text-muted form-text"
+                    >orderId is required or Invalid</small
+                  >
+                </div>
+
+                <div class="mb-3 form-group">
+                  <label for="productId" class="form-label">Product ID:</label>
+                  <input
+                    th:field="*{productId}"
+                    type="text"
+                    class="form-control"
+                    id="productId"
+                    aria-describedby="helpId"
+                    placeholder="please enter your ProductId..."
+                  />
+                  <small
+                    th:if="${#fields.hasErrors('productId')}"
+                    class="text-muted form-text"
+                    >productId is required or Invalid</small
+                  >
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="mb-3 form-group">
+                      <label for="quantity" class="form-label">Quanity:</label>
+                      <input
+                        th:field="*{quantity}"
+                        type="number"
+                        class="form-control"
+                        id="quantity"
+                        aria-describedby="helpId"
+                        placeholder="please enter your quantity..."
+                      />
+                      <small
+                        th:if="${#fields.hasErrors('quantity')}"
+                        class="text-muted form-text"
+                        >quantity is required or Invalid</small
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="mb-3 form-group">
+                      <label for="price" class="form-label">Price:</label>
+                      <input
+                        th:field="*{price}"
+                        type="text"
+                        class="form-control"
+                        id="price"
+                        aria-describedby="helpId"
+                        placeholder="please enter your price..."
+                      />
+                      <small
+                        th:if="${#fields.hasErrors('price')}"
+                        class="text-muted form-text"
+                        >price is required or Invalid</small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <a th:href="@{/admin/orderdetails}" class="btn btn-success"
+                    >List OrderDetail</a
+                  >
+                  <button type="submit" class="btn btn-primary">
+                    <span th:if="${orderDetail.isEdit}">Update</span>
+                    <span th:unless="${orderDetail.isEdit}">Save</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

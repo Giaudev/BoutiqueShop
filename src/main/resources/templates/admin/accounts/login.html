@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Admin</title>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link
+      href="/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- <div th:insert="site/fragments/header :: header"></div> -->
+
+    <div class="container-fluid tm-mt-60">
+      <div class="row tm-mb-50">
+        <div class="col-lg-4 col-12 mb-5 offset-lg-4">
+          <h2 class="tm-text-primary mb-5 text-center">Login</h2>
+          <form
+            id="login-form"
+            th:action="@{/admin/account/login}"
+            method="post"
+            class="tm-contact-form mx-auto"
+          >
+            <div class="form-group">
+              <input
+                type="text"
+                name="username"
+                class="form-control rounded-0"
+                placeholder="Username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                name="password"
+                class="form-control rounded-0"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="form-group tm-text-right">
+              <button
+                type="submit"
+                class="form-control btn btn-primary"
+                style="color: white !important"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start Footer -->
+    <!-- <div th:insert="site/fragments/footer :: footer"></div> -->
+    <!-- End Footer -->
+  </body>
+</html>

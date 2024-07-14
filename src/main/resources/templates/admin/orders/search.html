@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-header"><h2>Search Category</h2></div>
+            <div class="card-body">
+              <div
+                th:if="${message != null}"
+                class="alert alert-primary"
+                role="alert"
+              >
+                <i th:text="${message}"></i>
+              </div>
+              <div class="row">
+                <div
+                  class="col d-flex align-items-center justify-content-between"
+                >
+                  <form th:action="@{/admin/categories/search}">
+                    <div class="mb-3 d-flex align-items-center gap-3">
+                      <label for="name" class="form-label">Name</label>
+                      <input
+                        type="text"
+                        class="px-4 py-2"
+                        name="name"
+                        id="name"
+                        aria-describedby="helpId"
+                        placeholder="Please enter Category name..."
+                        style="width: 250px; border-radius: 8px; outline: none"
+                      />
+                      <button type="submit" class="btn btn-primary px-4 py-2">
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                  <div class="mb-3">
+                    <a
+                      th:href="@{/admin/categories/add}"
+                      class="btn btn-outline-info"
+                      >Add New Category</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-primary">
+                  <thead>
+                    <tr>
+                      <th scope="col">Category ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="" th:each="category : ${categories}">
+                      <td th:text="${category.categoryId}"></td>
+                      <td th:text="${category.name}"></td>
+                      <td>
+                        <a
+                          th:href="@{/admin/categories/view/{id}(id=${category.categoryId    })}"
+                          >Info</a
+                        >
+                        <a
+                          th:href="@{/admin/categories/edit/{id}(id=${category.categoryId})}"
+                          >Edit</a
+                        >
+                        <a
+                          th:href="@{/admin/categories/delete/{id}(id=${category.categoryId})}"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- start footer -->
+            <div class="card-footer text-muted">
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <!-- end footer -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

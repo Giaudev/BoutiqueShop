@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revenue Reports</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Revenue Reports</h1>
+
+      <div class="card mt-4">
+        <div class="card-header">Revenue Last Week</div>
+        <div class="card-body">
+          <h5 class="card-title">
+            Amount: <span th:text="${amountForLastWeek}">$0.00</span>
+          </h5>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-header">Revenue Last Month</div>
+        <div class="card-body">
+          <h5 class="card-title">
+            Amount: <span th:text="${amountForLastMonth}">$0.00</span>
+          </h5>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-header">Revenue Last Year</div>
+        <div class="card-body">
+          <h5 class="card-title">
+            Amount: <span th:text="${amountForLastYear}">$0.00</span>
+          </h5>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-header">Revenue by Category (Last Month)</div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              th:each="categoryRevenue : ${revenueByCategory}"
+            >
+              <span th:text="${categoryRevenue[0]}">Category Name</span>:
+              <span th:text="${categoryRevenue[1]}">$0.00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

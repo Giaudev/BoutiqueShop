@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> </head>
+
+  <body>
+    <!-- Main Sidebar Container -->
+    <aside
+      th:fragment="nav"
+      class="main-sidebar sidebar-dark-primary elevation-4"
+    >
+      <!-- Brand Logo -->
+      <a href="index3.html" class="brand-link">
+        <img
+          src="/admin/dist/img/fpt.jpg"
+          alt="Admin Logo"
+          class="brand-image img-circle elevation-3"
+          style="opacity: 0.8"
+        />
+        <span class="brand-text font-weight-light">Admin</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img
+              src="/admin/dist/img/tôi.jpg"
+              class="img-circle elevation-2"
+              alt="User Image"
+            />
+          </div>
+          <div class="info">
+            <a
+              href="#"
+              class="d-block"
+              th:text="${session.currentUser.username}"
+            ></a>
+          </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+          <div class="input-group" data-widget="sidebar-search">
+            <input
+              class="form-control form-control-sidebar"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-sidebar">
+                <i class="fas fa-search fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul
+            class="nav nav-pills nav-sidebar flex-column"
+            data-widget="treeview"
+            role="menu"
+            data-accordion="false"
+          >
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a th:href="@{/admin/home/view}" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>Home</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                th:href="@{/admin/categories/searchpaginated}"
+                class="nav-link"
+              >
+                <p>Category</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/products/searchpaginated}" class="nav-link">
+                <p>Product</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/accounts/searchpaginated}" class="nav-link">
+                <p>Account</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/customers/searchpaginated}" class="nav-link">
+                <p>Customer</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/admin/orders/searchpaginated}" class="nav-link">
+                <p>Order</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                th:href="@{/admin/orderdetails/searchpaginated}"
+                class="nav-link"
+              >
+                <p>OrderDetail</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                href="#"
+                class="nav-link"
+                data-toggle="modal"
+                data-target="#logoutModal"
+              >
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>Log out</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+      <!-- Logout Modal -->
+      <div
+        class="modal fade"
+        id="logoutModal"
+        tabindex="-1"
+        aria-labelledby="logoutModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="logoutModalLabel">Comfirm Logout</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">Are you sure you want to sign out?</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <a href="/admin/account/logout" class="btn btn-danger">Log out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </body>
+</html>
